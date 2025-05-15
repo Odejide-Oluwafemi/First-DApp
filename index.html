@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My First DApp on Sepolia Testnet">
+    <meta name="author" content="ELyteTech">
+    <meta name="keywords" content="Ethereum, DApp, Sepolia Testnet">
+
+    <style>
+      body
+      {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        font-family: cursive, Arial, sans-serif;
+      }
+
+      .container
+      {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container div
+      {
+        min-height: 240px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .container div *
+      {
+        font-family: cursive, Arial, sans-serif;
+        width: max-content;
+        margin-bottom: 10px;
+      }
+
+      .container div button
+      {
+        padding: 2px 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>My First DApp</h1>
+    <div class="container">
+      <div>
+        <p>Read and Write to the Blockchain:</p>
+
+        <label for="userInput">Type anything to store on the Blockchain</label>
+        <br/>
+        <textarea id="userInput" rows="4" cols="60" placeholder="Type Anything..."></textarea>
+        <br/>
+
+        <button id="writeButton" onclick="setText()">Store</button>
+        <button id="readButton" onclick="getText()">Read</button>
+
+        <p id="outputText"
+          style="
+          background-color: purple;
+          color: white;
+          font-weight: 500;
+          font-size: 20px;
+          padding: 10px;
+          "></p>
+      </div>
+    </div>
+
+    <script>
+      var getText;
+      var setText;
+    </script>
+
+    <script type="module">
+      import {
+        createWalletClient,
+        custom,
+        getContract,
+      } from "https://esm.sh/viem";
+
+      import {sepolia} from "https://esm.sh/viem/chains";
+
+      const walletClient = createWalletClient(
+        {
+          chain: sepolia,
+          transport: custom(window.ethereum),
+        }
+      );
+
+      const [userAddress] = await walletClient.requestAddresses();
+
+      const SmartContractAddress = "0x55b7A2b167027A8662e03059aa204a433c30F5B6";
+      const SmartContractABI = [
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "mood",
+            "type": "string"
+          }
+        ],
+        "name": "setMood",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "getMood",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ];
+
+    const SmartContractInstance = getContract(
+      {
+        address: SmartContractAddress,
+        abi: SmartContractABI,
+        client: walletClient,
+      }
+    );
+
+    getText = async function() {
+      // Read from the Blockchain
+      const textFromContract = await SmartContractInstance.read.getMood();
+      
+      // Update UI
+      document.getElementById("outputText").innerHTML = textFromContract;
+    }
+
+    setText = async function()
+    {
+      const textToWrite = document.getElementById("userInput").value;
+      
+      // Write to the Blockchain
+      await SmartContractInstance.write.setMood([textToWrite], { account: userAddress});
+    }
+    </script>
+  </body>
+</html>
