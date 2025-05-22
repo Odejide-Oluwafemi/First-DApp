@@ -2,31 +2,28 @@
 
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="My First DApp on Sepolia Testnet">
-    <meta name="author" content="ELyteTech">
-    <meta name="keywords" content="Ethereum, DApp, Sepolia Testnet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="My First DApp on Sepolia Testnet" />
+    <meta name="author" content="ELyteTech" />
+    <meta name="keywords" content="Ethereum, DApp, Sepolia Testnet" />
 
     <style>
-      body
-      {
+      body {
         display: block;
         text-align: center;
         padding: 10px;
         font-family: cursive, Arial, sans-serif;
       }
 
-      .container
-      {
+      .container {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
       }
 
-      .container div
-      {
+      .container div {
         min-height: 240px;
         display: flex;
         flex-direction: column;
@@ -34,15 +31,13 @@
         align-items: center;
       }
 
-      .container div *
-      {
+      .container div * {
         font-family: cursive, Arial, sans-serif;
         width: max-content;
         margin-bottom: 10px;
       }
 
-      .container div button
-      {
+      .container div button {
         padding: 2px 10px;
       }
     </style>
@@ -55,23 +50,61 @@
         <p>Read and Write to the Blockchain:</p>
 
         <label for="userInput">Type anything to store on the Blockchain</label>
-        <br/>
-        <textarea id="userInput" rows="4" cols="60" placeholder="Type Anything..."></textarea>
-        <br/>
+        <br />
+        <textarea
+          id="userInput"
+          rows="4"
+          cols="60"
+          placeholder="Type Anything..."
+        ></textarea>
+        <br />
 
         <button id="writeButton" onclick="setText()">Store</button>
         <button id="readButton" onclick="getText()">Read</button>
 
-        <p id="outputText"
+        <p
+          id="outputText"
           style="
-          background-color: purple;
-          color: white;
-          font-weight: 500;
-          font-size: 20px;
-          padding: 10px;
-          "></p>
+            background-color: purple;
+            color: white;
+            font-weight: 500;
+            font-size: 20px;
+            padding: 10px;
+          "
+        ></p>
       </div>
     </div>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        toastr.options = {
+          closeButton: false,
+          debug: false,
+          newestOnTop: false,
+          progressBar: false,
+          positionClass: "toast-top-right",
+          preventDuplicates: false,
+          onclick: null,
+          showDuration: "300",
+          hideDuration: "1000",
+          timeOut: "5000",
+          extendedTimeOut: "1000",
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "slideDown",
+          hideMethod: "fadeOut",
+        };
+      });
+    </script>
 
     <script>
       var getText;
@@ -85,69 +118,105 @@
         getContract,
       } from "https://esm.sh/viem";
 
-      import {sepolia} from "https://esm.sh/viem/chains";
+      import { sepolia } from "https://esm.sh/viem/chains";
 
-      const walletClient = createWalletClient(
+      const walletClient = createWalletClient({
+        chain: sepolia,
+        transport: custom(window.ethereum),
+      });
+
+      const [address] = await walletClient
+        .requestAddresses()
+        .then((addresses) => {
+          if (addresses.length === 0) {
+            toastr.error("Please connect your wallet");
+            document.getElementById("writeButton").disabled = true;
+            document.getElementById("readButton").disabled = true;
+            return null;
+          } else {
+            toastr.success("Wallet connected successfully");
+            document.getElementById("writeButton").disabled = false;
+            document.getElementById("readButton").disabled = false;
+            return addresses;
+          }
+        });
+
+      const MoodContractAddress = "0x73604788A4d444A92E35784e57edB1C7ecffbAcD";
+      const MoodContractABI = [
         {
-          chain: sepolia,
-          transport: custom(window.ethereum),
-        }
-      );
+          inputs: [
+            {
+              internalType: "string",
+              name: "mood",
+              type: "string",
+            },
+          ],
+          name: "setMood",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getMood",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ];
 
-      const [userAddress] = await walletClient.requestAddresses();
-
-      const SmartContractAddress = "0x55b7A2b167027A8662e03059aa204a433c30F5B6";
-      const SmartContractABI = [
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "mood",
-            "type": "string"
-          }
-        ],
-        "name": "setMood",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [],
-        "name": "getMood",
-        "outputs": [
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      }
-    ];
-
-    const SmartContractInstance = getContract(
-      {
-        address: SmartContractAddress,
-        abi: SmartContractABI,
+      const MoodContractInstance = getContract({
+        address: MoodContractAddress,
+        abi: MoodContractABI,
         client: walletClient,
-      }
-    );
+      });
 
-    getText = async function() {
-      // Read from the Blockchain
-      const textFromContract = await SmartContractInstance.read.getMood();
-      
-      // Update UI
-      document.getElementById("outputText").innerHTML = textFromContract;
-    }
+      getText = async function (toast = true) {
+        console.log(address);
+        const text = await MoodContractInstance.read
+          .getMood()
+          .then((result) => {
+            if (!result) {
+              if (toast)  toastr.error("Failed to retrieve data");
+              return null;
+            } else if (result === "") {
+              if (toast)  toastr.error("Data is Empty");
+              document.getElementById("outputText").innerHTML = "Data is Empty";
+              return "";
+            } else {
+              if (toast)  toastr.success("Data retrieved successfully");
+              document.getElementById("outputText").innerHTML = result;
+              return result;
+            }
+          });
+      };
 
-    setText = async function()
-    {
-      const textToWrite = document.getElementById("userInput").value;
-      
-      // Write to the Blockchain
-      await SmartContractInstance.write.setMood([textToWrite], { account: userAddress});
+      setText = async function () {
+        const text = document.getElementById("userInput").value;
+        
+        if (text === "") {
+          toastr.error("Please enter a value");
+          return;
+        }
+        
+        await MoodContractInstance.write.setMood([text], {
+          account: address,
+        })
+          .then(() => {
+            toastr.success("Data stored successfully");
+            document.getElementById("userInput").value = "";
+            getText(false);
+          })
+          .catch((error) => {
+            toastr.error("Failed to store data");
+            console.error(error);
+          });
     }
     </script>
   </body>
