@@ -1,6 +1,6 @@
-import Home from "./Home.js";
-import StaticPage from "./StaticPage.js";
-import TodoApp from "./TodoApp.js";
+import Home from "./HomeApp/Home.js";
+import StaticPage from "./StaticPageApp/StaticPage.js";
+import TodoApp from "./TodoApp/TodoApp.js";
 
 function App() {
   return (
