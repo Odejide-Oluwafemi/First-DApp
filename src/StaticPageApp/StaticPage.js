@@ -35,7 +35,7 @@ function NavBar()
     <>
       <nav className="navbar">
         <span className="navbar-list-items">
-          <img src="logo.png" width="60px"/>
+          <img src="logo.png" width="60px" alt="React Logo"/>
           <span>ReactFacts</span>
         </span>
 

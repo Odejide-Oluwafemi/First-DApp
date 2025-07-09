@@ -1,0 +1,201 @@
+/* Entire Card Frame/Container */
+.card
+{
+  width: 610px;
+  height: 270px;
+  margin-block-end: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 7px 10px gray;
+  font-family: Inter, sans-serif;
+}
+
+
+/* Container to hold the Left-Hand-Side Image */
+.card > .image-container
+{
+  width: 457px;
+  height: 239px;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-right: 20px;
+}
+
+
+/* Card Left-Hand-Side Image */
+#image
+{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* Container for the Right-Hand-Side of the Card */
+.card-info
+{
+  height: 100%;
+  display: inline;
+  padding-right: 20px;
+  padding-top: 8px;
+  
+}
+
+/* Locaation Icon/Marker */
+.card-info svg
+{
+  fill: #F55A5A;
+  margin-right: 4px;
+}
+
+/* Country text (Japan) */
+.card-info > .card-header span p
+{
+  display: inline;
+  margin-right: 12px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Link (View on Google Maps */
+.card-info > .card-header a
+{
+  color: #2B283A;
+  font-size: 0.7rem;
+}
+
+.card-info > .card-header a:visited
+{
+  color: #918E9B;
+}
+
+/* Card Description */
+.card-info > .detail-text
+{
+  font-size: 0.8rem;
+  overflow: hidden;
+  line-height: 1.5;
+  display: -webkit-box;
+  box-orient: vertical;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Entire Bottom Section*/
+.card-info > .reaction-section
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Entire Comment Section */
+.card-info > .reaction-section > .comment-section
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+}
+
+/* Comment Icon */
+.card-info > .reaction-section > .comment-section > svg
+{
+  fill: #F55A5A;
+  width: 23px;
+  margin-right: 4px;
+}
+
+/* Comment Count */
+.card-info > .reaction-section > .comment-section > p
+{
+  font-size: 14px;
+  margin-right: 7px;
+}
+
+/* Comment box container */
+.card-info > .reaction-section > .comment-section > .comment-box-container
+{
+  display: flex;
+}
+
+/* Comment <input/> element */
+.card-info > .reaction-section > .comment-section > .comment-box-container > .comment-box
+{
+  width: 10;
+  padding: 10px;
+  border: 1px solid #F55A5A;
+  border-radius: 50px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right-width: 0;
+  font-weight: 500;
+  outline: none;
+}
+
+.card-info > .reaction-section > .comment-section > .comment-box-container > .comment-box:focus
+{
+  border: 2px solid #F55A5A;
+}
+
+.card-info > .reaction-section > .comment-section > .comment-box-container > .submit
+{
+  width: 40px;
+  padding: 10px;
+  border: 1px solid #F55A5A;
+  border-radius: 50px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 0;
+  outline: none;
+  background-color: #F55A5A;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Entire Voting Section */
+.card-info > .reaction-section > .vote-section
+{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3px;
+  flex-grow: 1;
+}
+
+/* Both Vote Containers */
+.card-info > .reaction-section > .vote-section > span
+{
+  display: flex;
+}
+
+/* Vote Count */
+.card-info > .reaction-section > .vote-section > span > p
+{
+  font-size: 12px;
+}
+
+/* Thumb Icons */
+.card-info > .reaction-section > .vote-section > span > svg
+{
+  fill: rgb(102, 102, 102);
+  width: 18px;
+  margin-right: 1px;
+}
+
+/*
+.card-info > .reaction-section > .vote-section > .upvote-container
+{
+}
+
+.card-info > .reaction-section > .vote-section > .downvote-container
+{
+}
+*/
