@@ -1,0 +1,53 @@
+.main-body
+{
+  background-color: rgb(230, 230, 230);
+  padding: 30px 30px 10px;
+}
+
+.add-ingredient-form
+{
+  display: flex;
+  justify-content: center;
+  height: 42px;
+  margin-block-end: 15px;
+}
+
+.add-ingredient-form > input
+{
+  padding: 12px 20px;
+  border: 1px solid black;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 30px;
+  border-right: 0px;
+  flex-grow: 1;
+  min-width: 150px;
+  max-width: 400px;
+}
+
+.add-ingredient-form > button
+{
+  padding: 12px 10px;
+  border: 1px solid black;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 30px;
+  border-left: 0px;
+
+  background-color: #141413;
+  color: #FAFAF8;
+  width: 150px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.add-ingredient-form > button::before
+{
+  content: "+";
+  margin-right: 5px;
+}
+
+.added-ingredient-container
+{
+  border: 1px solid #141413;
+  border-radius: 14px;
+  padding: 1px 14px;
+}

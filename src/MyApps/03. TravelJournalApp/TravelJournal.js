@@ -5,7 +5,7 @@ import "./traveljournal.css";
 export default function TravelJournal()
 {
   return(
-    <main className="tj-body">
+    <main className="travel-journal-body">
       <Header/>
       <Section/>
     </main>

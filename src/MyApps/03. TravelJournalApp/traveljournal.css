@@ -1,9 +1,9 @@
-.tj-body
+.travel-journal-body
 {
   font-family: Inter, sans-serif;
 }
 
-header
+.travel-journal-header
 {
   background-color: #F55A5A;
   height: 55px;
@@ -14,14 +14,14 @@ header
   justify-content: center;
 }
 
-header > svg
+.travel-journal-header > svg
 {
   width: 24px;
   margin-right: 7px;
   fill: white;
 }
 
-header > h1
+.travel-journal-header > h1
 {
   font-size: 1.1rem;
   font-weight: 500;

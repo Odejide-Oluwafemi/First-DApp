@@ -17,7 +17,7 @@
 /* Container to hold the Left-Hand-Side Image */
 .card > .image-container
 {
-  width: 457px;
+  min-width: 187px;
   height: 239px;
   overflow: hidden;
   border-radius: 12px;

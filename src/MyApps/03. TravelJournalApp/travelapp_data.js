@@ -35,4 +35,16 @@ export default [
         dates: "01 Oct, 2021 - 18 Nov, 2021",
         text: "The Geiranger Fjord is a fjord in the Sunnmøre region of Møre og Romsdal county, Norway. It is located entirely in the Stranda Municipality."
     },
+    {
+        id: 4,
+        img: {
+            src: "https://i0.wp.com/blog.wakanow.com/wp-content/uploads/2024/04/zuma-rock.jpeg?resize=1024%2C682&ssl=1",
+            alt: "Olumo Rock, Abeokuta, Nigeria"
+        },
+        title: "Olumo Rock",
+        country: "Abeokuta, Nigeria",
+        googleMapsLink: "https://maps.app.goo.gl/3KRkMM3qHGrkj66LA",
+        dates: "01 Jan, 2025 - 07 July, 2025",
+        text: "Olumo Rock is a historical landmark in Abeokuta, offering visitors the chance to explore natural caves and tunnels while learning about the rock’s significance in Egba history and culture. Visitors can climb to the top for panoramic views of the city and surrounding landscape."
+    },
 ]
