@@ -1,0 +1,25 @@
+.meme-generator-header
+{
+  background-color: purple;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.meme-generator-header > span
+{
+  display: contents;
+}
+
+.meme-generator-header > span > img
+{
+  width: 60px;
+  margin-right: 10px;
+}
+
+.meme-generator-header > span > h1
+{
+  color: white;
+}
