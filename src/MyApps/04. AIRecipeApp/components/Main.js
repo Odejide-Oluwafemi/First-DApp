@@ -1,43 +1,48 @@
 import { useRef, useState } from "react";
 import "./main.css";
+import Recipe from "./Recipe";
+import Ingredients from "./Ingredients";
+import {getRecipeFromMistral } from "../ai.js";
 
-export default function Main()
-{
-  const [ingredients, setIngredients] = useState([]);
-  const inputBox = useRef();
-  const ingredientsList = ingredients.map((ingredient) => <li>{ingredient}</li>);
+export default function Main() {
+  const [ingredients, setIngredients] = useState([
+    "Oregano",
+    "Onion",
+    "Chicken",
+    "Bell Pepper",
+  ]);
 
-  function handleSubmit(event)
-  {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const newIngredient= formData.get("ingredient");
-
+  function addIngredient(formData) {
+    const newIngredient = formData.get("ingredient");
     setIngredients([...ingredients, newIngredient]);
-
-    inputBox.current.value = "";
   }
 
-  return(
+  const [recipe, setRecipe] = useState("");
+
+  async function getRecipe() {
+    const API_RESPONSE = await getRecipeFromMistral(ingredients);
+    setRecipe(API_RESPONSE);
+  }
+
+  return (
     <main className="main-body">
-      <form className="add-ingredient-form" onSubmit={handleSubmit}>
-        <input className="add-ingredient-input"
+      <form className="add-ingredient-form" action={addIngredient}>
+        <input
+          className="add-ingredient-input"
           type="text"
           aria-label="Add Ingredient"
           placeholder="e.g oregano"
           name="ingredient"
-          ref={inputBox}
         />
 
         <button className="add-ingredient-button">Add Ingredient</button>
       </form>
 
-      <div className="added-ingredient-container">
-        <h2>Ingredient List:</h2>
-        <ul>
-          {ingredientsList}
-        </ul>
-      </div>
+      {ingredients.length > 0 && (
+        <Ingredients ingredients={ingredients} getRecipe={getRecipe} />
+      )}
+
+      {recipe && <Recipe recipe={recipe}/>}
     </main>
   );
 }
