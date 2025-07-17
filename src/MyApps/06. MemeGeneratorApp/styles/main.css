@@ -20,13 +20,13 @@
   margin-bottom: 20px;
 }
 
-/* .form-container .form-row div
+/* .meme-generator-form-container .meme-generator-form-row div
 {
 } */
 
 .meme-generator-form-container .meme-generator-form-row input
 {
-  width: 100%;
+  min-width: 300px;
   padding: 10px;
   border-radius: 15px;
   border: 1px solid black;

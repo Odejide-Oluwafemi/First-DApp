@@ -1,26 +1,12 @@
-import "./styles/memegeneratorapp.css";
+import Header from "./components/Header.jsx";
+import Main from "./components/Main.jsx";
 
 export default function MemeGeneratorApp()
 {
   return(
-    <main className="meme-generator-main">
-      <form className="meme-generator-form-container">
-        <div className="meme-generator-form-row">
-          <div>
-            <label>Top Text</label>
-            <br/>
-            <input type="text" />
-          </div>
-
-          <div>
-            <label>Bottom Text</label>
-            <br/>
-            <input type="text" />
-          </div>
-        </div>
-        
-        <button>Generate Meme</button>
-      </form>
-    </main>
+    <>
+      <Header/>
+      <Main/>
+    </>
   );
 }
