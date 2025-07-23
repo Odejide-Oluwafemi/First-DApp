@@ -1,8 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./main.css";
 import Recipe from "./Recipe";
 import Ingredients from "./Ingredients";
-import {getRecipeFromMistral } from "../ai.js";
+import { getRecipeFromMistral } from "../ai.js";
 
 export default function Main() {
   const [ingredients, setIngredients] = useState([]);
@@ -13,11 +13,25 @@ export default function Main() {
   }
 
   const [recipe, setRecipe] = useState("");
+  const recipeSection = useRef(null);
 
   async function getRecipe() {
     const API_RESPONSE = await getRecipeFromMistral(ingredients);
     setRecipe(API_RESPONSE);
   }
+
+  useEffect(() => {
+    if (recipeSection.current && recipe && recipe !== "") {
+      recipeSection.current.scrollIntoView({ behaviour: "smooth" });
+
+      // const yCoord =
+      //   recipeSection.current.getBoundingClientRect().top + window.scrollY;
+      // window.scroll({
+      //   top: yCoord,
+      //   behavior: "smooth",
+      // });
+    }
+  }, [recipe]);
 
   return (
     <main className="main-body">
@@ -34,10 +48,14 @@ export default function Main() {
       </form>
 
       {ingredients.length > 0 && (
-        <Ingredients ingredients={ingredients} getRecipe={getRecipe} />
+        <Ingredients
+          ref={recipeSection}
+          ingredients={ingredients}
+          getRecipe={getRecipe}
+        />
       )}
 
-      {recipe && <Recipe recipe={recipe}/>}
+      {recipe && <Recipe recipe={recipe} />}
     </main>
   );
 }

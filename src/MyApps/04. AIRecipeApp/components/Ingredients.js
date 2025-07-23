@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Ingredients({ ingredients, getRecipe }) {
+export default function Ingredients({ ingredients, getRecipe, ref }) {
   const ingredientsList = ingredients.map((ingredient) => (
     <li key={ingredient + Math.random() * ingredients.length}>{ingredient}</li>
   ));
@@ -11,7 +11,7 @@ export default function Ingredients({ ingredients, getRecipe }) {
 
       {ingredientsList.length > 3 && (
         <div className="get-recipe-container">
-          <div>
+          <div ref={ref}>
             <h3>Ready for a Recipe?</h3>
             <p>Generate a recipe from your list of ingredients</p>
           </div>
