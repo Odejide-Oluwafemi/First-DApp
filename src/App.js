@@ -5,10 +5,14 @@ import TravelJournal from "./MyApps/03. TravelJournalApp/TravelJournal.js";
 import AIRecipeApp from "./MyApps/04. AIRecipeApp/AIRecipeApp.js";
 import SoundPadApp from "./MyApps/05. SoundPadApp/SoundPadApp.jsx";
 import MemeGeneratorApp from "./MyApps/06. MemeGeneratorApp/MemeGeneratorApp.jsx";
+import Tenzies from "./MyApps/07. Tenzies/Tenzies.jsx";
 
 function App() {
   return (
     <>
+      <Tenzies/>
+      <hr/>
+
       <MemeGeneratorApp/>
       <hr/>
       
