@@ -6,10 +6,15 @@ import AIRecipeApp from "./MyApps/04. AIRecipeApp/AIRecipeApp.js";
 import SoundPadApp from "./MyApps/05. SoundPadApp/SoundPadApp.jsx";
 import MemeGeneratorApp from "./MyApps/06. MemeGeneratorApp/MemeGeneratorApp.jsx";
 import Tenzies from "./MyApps/07. Tenzies/Tenzies.jsx";
+import AssemblyEndGame from "./MyApps/08. AssemblyEndGame/AssemblyEndGame.jsx";
 
 function App() {
   return (
     <>
+      <AssemblyEndGame/>
+      
+      {/* <hr/>
+      
       <Tenzies/>
       <hr/>
 
@@ -32,7 +37,7 @@ function App() {
       <hr/>
       
       <TodoApp />
-      <hr/>
+      <hr/> */}
     </>
   );
 }
