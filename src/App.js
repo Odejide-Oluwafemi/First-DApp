@@ -12,8 +12,7 @@ function App() {
   return (
     <>
       <AssemblyEndGame/>
-      
-      {/* <hr/>
+      <hr/>
       
       <Tenzies/>
       <hr/>
@@ -37,7 +36,7 @@ function App() {
       <hr/>
       
       <TodoApp />
-      <hr/> */}
+      <hr/>
     </>
   );
 }
